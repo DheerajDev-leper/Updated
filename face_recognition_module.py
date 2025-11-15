@@ -103,9 +103,10 @@ def start_face_recognition():
                 cv2.putText(frame, name, (x1, y1 - 10),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 2)
 
-        cv2.imshow("Pi Face Recognition", frame)
+        # cv2.imshow("Pi Face Recognition", frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
     cv2.destroyAllWindows()
+
