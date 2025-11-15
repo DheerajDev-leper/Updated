@@ -72,3 +72,14 @@ def hotword_listener(hotword="hey pi"):
             else:
                 speak("I didn't catch that.")
                 message_queue.put("Bot: No command heard")
+
+
+# --------------------------
+# MAIN RUNNER
+# --------------------------
+if __name__ == "__main__":
+    detect_microphone_index()
+    print("\nMicrophone Ready. Starting Hotword Listener...\n")
+
+    command = hotword_listener()
+    print("\nFinal Command:", command)
