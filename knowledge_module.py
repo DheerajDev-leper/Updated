@@ -1,36 +1,19 @@
 import wikipedia
-import requests
+import google.generativeai as genai
 
-# Gemini API key
-GEMINI_API_KEY = "AIzaSyDP3nkgW-ZmL_YxNp8AeC4Qb0ViG1o72Sc"
-GEMINI_ENDPOINT = "https://api.gemini.com/v1/query"  # Replace with correct Gemini endpoint
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
 
 def wiki_search(query):
     try:
-        return wikipedia.summary(query, sentences=2)
-    except Exception:
-        return "Sorry, I could not find that on Wikipedia."
+        result = wikipedia.summary(query, sentences=2)
+        return result
+    except:
+        return "No result from Wikipedia."
 
-def gemini_query(query):
-    """
-    Sends query to Gemini API and returns response text.
-    """
-    headers = {
-        "Authorization": f"Bearer {GEMINI_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    data = {
-        "prompt": query,
-        "max_tokens": 150
-    }
-
+def gemini_query(q):
     try:
-        response = requests.post(GEMINI_ENDPOINT, json=data, headers=headers, timeout=10)
-        if response.status_code == 200:
-            result = response.json()
-            # Adjust based on Gemini API response format
-            return result.get("answer", "Gemini could not generate a response.")
-        else:
-            return f"Gemini API error: {response.status_code}"
-    except Exception as e:
-        return f"Error contacting Gemini API: {e}"
+        model = genai.GenerativeModel("gemini-pro")
+        res = model.generate_content(q)
+        return res.text
+    except:
+        return "Gemini error."
