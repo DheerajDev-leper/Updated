@@ -38,11 +38,10 @@ def speak(text):
 
 
 def listen(timeout=4):
-    """Listen using the selected microphone."""
     r = sr.Recognizer()
 
     with sr.Microphone(device_index=USB_MIC_INDEX) as source:
-        print("Listening...")
+        print(f"Listening using mic index: {USB_MIC_INDEX}")
         r.adjust_for_ambient_noise(source)
         audio = r.listen(source, phrase_time_limit=timeout)
 
@@ -83,3 +82,4 @@ if __name__ == "__main__":
 
     command = hotword_listener()
     print("\nFinal Command:", command)
+
