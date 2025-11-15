@@ -1,7 +1,7 @@
 import wikipedia
 import google.generativeai as genai
 
-genai.configure(api_key="YOUR_GEMINI_API_KEY")
+genai.configure(api_key="AIzaSyDP3nkgW-ZmL_YxNp8AeC4Qb0ViG1o72Sc")
 
 def wiki_search(query):
     try:
@@ -17,3 +17,4 @@ def gemini_query(q):
         return res.text
     except:
         return "Gemini error."
+
